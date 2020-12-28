@@ -1,0 +1,13 @@
+{
+    "Sitetitle": "多語系網站",
+    "Name": "名字",
+    "NameError": "必須有名字!",
+    "Email": "電子郵件",
+    "PhoneNo": "手機號碼",
+    "Password": "密碼",
+    "Bio": "輸入bio碼",
+    "TermsConditions": "我同意條款和條件。",
+    "Submit": "提交",
+    "en-us": "英文",
+    "zh-tw": "中文"
+}
