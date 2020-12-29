@@ -1,20 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'translate-app';
   mdate:any="2020/12/29";
   nameError = false;
   ret: string = 'en-us';
-  constructor(public translate: TranslateService) {
+  locale: {
+    firstDayOfWeek: 1;
+    dayNames: string[];
+    dayNamesShort: string[];
+    dayNamesMin: string[];
+    monthNames: string[];
+    monthNamesShort: string[];
+    today: string;
+    clear: string;
+  } | any;
+  constructor(private config: PrimeNGConfig,public translate: TranslateService) {
     translate.addLangs(['en-us', 'zh-tw']);
     translate.setDefaultLang(this.getLang());
   }
+  ngOnInit(): void {
+    this.locale = {
+      firstDayOfWeek: 1,
+      dayNames: [],
+      dayNamesShort: [],
+      dayNamesMin: [],
+      monthNames: [],
+      monthNamesShort: [],
+      today: "",
+      clear: ""
+    };
+    this.translate.stream('dayNames').subscribe(dayNames=> this.locale.dayNames=dayNames.split(','));
+    this.translate.stream('dayNamesShort').subscribe(dayNamesShort=> this.locale.dayNamesShort=dayNamesShort.split(','));
+    this.translate.stream('dayNamesMin').subscribe(dayNamesMin=> {
+      this.locale.dayNamesMin=dayNamesMin.split(',');
+      console.log(this.locale.dayNamesMin);
+    });
+    this.translate.stream('monthNames').subscribe(monthNames=> this.locale.monthNames=monthNames.split(','));
+    this.translate.stream('monthNamesShort').subscribe(monthNamesShort=> this.locale.monthNamesShort=monthNamesShort.split(','));
+    this.translate.stream('today').subscribe(today=> this.locale.today=today);
+    this.translate.stream('clear').subscribe(clear=> this.locale.clear=clear);
+  }  
 
   switchLang(lang: string) {
     localStorage.setItem('lang', lang);
@@ -33,6 +66,11 @@ export class AppComponent {
     this.ret = str === null ? 'en-us' : str;
     return this.ret;
   }
+
+    translate2(lang: string) {
+        this.translate.use(lang);
+        this.translate.get('primeng').subscribe(res => this.config.setTranslation(res));
+    }
 
   ch = {
     /** 每週第一天，0代表週日 */
