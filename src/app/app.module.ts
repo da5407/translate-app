@@ -3,7 +3,9 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import {CalendarModule} from 'primeng/calendar';
 import { NgModule } from '@angular/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
@@ -17,8 +19,10 @@ export function httpTranslateLoader(http: HttpClient) {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
+    CalendarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
