@@ -59,7 +59,7 @@
                 <span class="input-group-text col-12">{{'date' | translate}}</span>
             </div>
             <div class="col-9" style="border: solid 1px gray;">
-                <p-calendar [showIcon]="true" name="mdate" id="mdate" formControlName="mdate" [showTime]="false"  [locale]="locale" dateFormat="yy/mm/dd"  yearRange="2000:2030" [showButtonBar]="true" [monthNavigator]="true"  [yearNavigator]="true" yearRange="2000:2030"></p-calendar>
+                <p-calendar [showIcon]="true" name="mdate" id="mdate" [(ngModel)]="mDate" dateFormat="yy/mm/dd" [showButtonBar]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"></p-calendar>
             </div>
         </div>
         <div class="input-group fMargin row ">
